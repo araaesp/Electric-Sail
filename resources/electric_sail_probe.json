@@ -1,0 +1,29 @@
+{
+  "start_time": "2025-01-01 12:00:00",
+  "end_time": "2030-01-01 12:00:00",
+  "bodies": [
+    {
+      "name": "Sun",
+      "mass": 1.98847e30,
+      "radius": 696340,
+      "position": [0, 0, 0],
+      "velocity": [0, 0, 0]
+    }
+  ],
+  "keplerian_solar_probes": [],
+  "electric_sail_probes": [
+    {
+      "name": "E-Sail Mission 1",
+      "mass": 100,
+      "radius": 0.01,
+      "position": [149600000, 0, 0],
+      "velocity": [0, 29.78, 0],
+      "N": 100,
+      "L": 20,
+      "V": 2000,
+      "r_w": 1e-8,
+      "phi_deg": 45,
+      "theta_deg": 45
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "sun": {
+    "radius": 695508,
+    "mass": 1.9891e30,
+    "mu": 1.32712440018e11
+  },
+  "mercury": {
+    "radius": 2440.53,
+    "mass": 0.330114e24,
+    "mu": 2.2032e4
+  },
+  "venus": {
+    "radius": 6051.8,
+    "mass": 4.86747e24,
+    "mu": 3.24859e5
+  },
+  "earth": {
+    "radius": 6378.1366,
+    "mass": 5.97237e24,
+    "mu": 3.986004418e5
+  },
+  "moon": {
+    "radius": 1737.5,
+    "mass": 7.3476e22,
+    "mu": 4.9048695e3
+  },
+  "mars": {
+    "radius": 3396.19,
+    "mass": 0.641712e24,
+    "mu": 4.282837e4
+  },
+  "jupiter barycenter": {
+    "radius": 71492,
+    "mass": 1898.187e24,
+    "mu": 1.26686534e8
+  },
+  "saturn barycenter": {
+    "radius": 60268,
+    "mass": 568.336e24,
+    "mu": 3.7931187e7
+  },
+  "uranus barycenter": {
+    "radius": 25559,
+    "mass": 86.8127e24,
+    "mu": 5.793939e6
+  },
+  "neptune barycenter": {
+    "radius": 24764,
+    "mass": 102.4126e24,
+    "mu": 6.836529e6
+  }
+}

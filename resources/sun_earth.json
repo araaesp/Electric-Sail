@@ -1,0 +1,49 @@
+{
+  "time": 23652000,
+  "bodies": [
+    {
+      "name": "Sol",
+      "mass": 1.9891e+30,
+      "radius": 695508,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "velocity": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "keplerian_bodies": [
+    {
+      "name": "Terra",
+      "mass": 5.97237e24,
+      "a": 1.496e8,
+      "e": 0,
+      "i": 0,
+      "omega": 0,
+      "OMEGA": 0,
+      "radius": 6378.0,
+      "central_body": {
+        "name": "Sun",
+        "mass": 1.9891e+30,
+        "radius": 695508,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ]
+      },
+      "M": "nan",
+      "theta": 0
+    }
+  ]
+}

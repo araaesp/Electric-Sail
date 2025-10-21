@@ -1,0 +1,7 @@
+{
+    "python.pythonPath": "C:\\Users\\mddad\\.conda\\envs\\tcc_env\\python.exe",
+    "python.envFile": "${workspaceFolder}\\.env",
+    "terminal.integrated.env.linux": {
+        "PYTHONPATH": "${workspaceFolder}"
+    }
+}

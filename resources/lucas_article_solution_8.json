@@ -1,0 +1,248 @@
+{
+  "time": 39145248,
+  "bodies": [
+    {
+      "name": "Sol",
+      "mass": 1.9891e+30,
+      "radius": 695508,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "velocity": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "keplerian_bodies": [
+    {
+      "name": "Venus",
+      "mass": 4.86747e24,
+      "a": 108200000,
+      "e": 0,
+      "i": 0,
+      "omega": 0,
+      "OMEGA": 0,
+      "radius": 6051.8,
+      "central_body": {
+        "name": "Sun",
+        "mass": 1.9891e+30,
+        "radius": 695508,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ]
+      },
+      "M": "nan",
+      "theta": 100
+    },
+    {
+      "name": "Terra",
+      "mass": 5.97237e24,
+      "a": 1.496e8,
+      "e": 0,
+      "i": 0,
+      "omega": 0,
+      "OMEGA": 0,
+      "radius": 6378.0,
+      "central_body": {
+        "name": "Sun",
+        "mass": 1.9891e+30,
+        "radius": 695508,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ]
+      },
+      "M": "nan",
+      "theta": 50
+    },
+    {
+      "name": "Lua",
+      "mass": 7.3476e22,
+      "a": 384400,
+      "e": 0,
+      "i": 0,
+      "omega": 0,
+      "OMEGA": 0,
+      "radius": 6378.0,
+      "keplerian_central_body": {
+        "name": "Earth",
+        "mass": 5.97237e24,
+        "a": 1.496e8,
+        "e": 0,
+        "i": 0,
+        "omega": 0,
+        "OMEGA": 0,
+        "radius": 6378.0,
+        "central_body": {
+          "name": "Sun",
+          "mass": 1.9891e+30,
+          "radius": 6370,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "M": "nan",
+        "theta": 50
+      },
+      "M": "nan",
+      "theta": 120
+    },
+    {
+      "name": "Marte",
+      "mass": 0.641712e24,
+      "a": 2.28e8,
+      "e": 0,
+      "i": 0,
+      "omega": 0,
+      "OMEGA": 0,
+      "radius": 3396.19,
+      "central_body": {
+        "name": "Sun",
+        "mass": 1.9891e+30,
+        "radius": 695508,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ]
+      },
+      "M": "nan",
+      "theta": 250
+    },
+    {
+      "name": "Jupiter",
+      "mass": 1898.187e24,
+      "a": 778299000,
+      "e": 0,
+      "i": 0,
+      "omega": 0,
+      "OMEGA": 0,
+      "radius": 71492.0,
+      "central_body": {
+        "name": "Sun",
+        "mass": 1.9891e+30,
+        "radius": 695508,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ]
+      },
+      "M": "nan",
+      "theta": 300
+    },
+    {
+      "name": "Asteroide",
+      "mass": 10e7,
+      "a": 2.992e8,
+      "e": 0.5,
+      "i": 0,
+      "omega": 0,
+      "OMEGA": 0,
+      "radius": 71492.0,
+      "central_body": {
+        "name": "Sun",
+        "mass": 1.9891e+30,
+        "radius": 695508,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ]
+      },
+      "M": "nan",
+      "theta": 0
+    }
+  ],
+  "keplerian_solar_probes": [
+    {
+      "name": "Vela Solar",
+      "mass": 20.0,
+      "a": 930000,
+      "e": 0,
+      "i": 0,
+      "omega": 0,
+      "OMEGA": 0,
+      "radius": 42.0,
+      "M": "nan",
+      "theta": 90,
+      "alpha": -5,
+      "delta": 0,
+      "area": 3795,
+      "r_diff": 0.0528,
+      "r_spec": 0.8272,
+      "e_f": 0.05,
+      "e_b": 0.55,
+      "a_f": 0.12,
+      "a_b": 0.12,
+      "chi_f": 0.79,
+      "chi_b": 0.55,
+      "keplerian_central_body": {
+        "name": "Earth",
+        "mass": 5.97237e24,
+        "a": 1.496e8,
+        "e": 0,
+        "i": 0,
+        "omega": 0,
+        "OMEGA": 0,
+        "radius": 6378.0,
+        "central_body": {
+          "name": "Sun",
+          "mass": 1.9891e+30,
+          "radius": 695508,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ]
+        },
+        "M": "nan",
+        "theta": 50
+      }
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "time": 19414080,
+  "bodies": [
+    {
+      "name": "Sun",
+      "mass": 1.9891e+30,
+      "radius": 695508,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "velocity": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "keplerian_bodies": [
+    {
+      "name": "Venus",
+      "mass": 4.86747e24,
+      "a": 108200000,
+      "e": 0,
+      "i": 0,
+      "omega": 0,
+      "OMEGA": 0,
+      "radius": 6051.8,
+      "central_body": {
+        "name": "Sun",
+        "mass": 1.9891e+30,
+        "radius": 695508,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ]
+      },
+      "M": "nan",
+      "theta": 0
+    },
+    {
+      "name": "Terra",
+      "mass": 5.97237e24,
+      "a": 1.496e8,
+      "e": 0,
+      "i": 0,
+      "omega": 0,
+      "OMEGA": 0,
+      "radius": 6378.0,
+      "central_body": {
+        "name": "Sun",
+        "mass": 1.9891e+30,
+        "radius": 695508,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ]
+      },
+      "M": "nan",
+      "theta": 0
+    },
+    {
+      "name": "Marte",
+      "mass": 0.641712e24,
+      "a": 2.28e8,
+      "e": 0,
+      "i": 0,
+      "omega": 0,
+      "OMEGA": 0,
+      "radius": 3396.19,
+      "central_body": {
+        "name": "Sun",
+        "mass": 1.9891e+30,
+        "radius": 695508,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ]
+      },
+      "M": "nan",
+      "theta": 0
+    },
+    {
+      "name": "Jupiter",
+      "mass": 1898.187e24,
+      "a": 778299000,
+      "e": 0,
+      "i": 0,
+      "omega": 0,
+      "OMEGA": 0,
+      "radius": 71492.0,
+      "central_body": {
+        "name": "Sun",
+        "mass": 1.9891e+30,
+        "radius": 695508,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ]
+      },
+      "M": "nan",
+      "theta": 0
+    }
+  ]
+}
