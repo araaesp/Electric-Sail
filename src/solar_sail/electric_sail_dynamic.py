@@ -79,12 +79,12 @@ class ElectricSailDynamic:
         # eixo z da orbita escrito no sistema inercial
         z_o = r_inercial / r
 
-        # eixo y da orbita escrito no sistema inercial
-        h_vec = np.cross(r_inercial, v_inercial)
-        y_o = h_vec / np.linalg.norm(h_vec)
-
         # eixo x da orbita escrito no sistema inercial
-        x_o = np.cross(y_o, z_o)
+        h_vec = np.cross(r_inercial, v_inercial)
+        x_o = - h_vec / np.linalg.norm(h_vec)
+
+        # eixo y da orbita escrito no sistema inercial
+        y_o = np.cross(z_o, x_o)
 
         # Matriz de rotacao orbita -> inercial
         matriz_rotacao = np.array([x_o, y_o, z_o]).T

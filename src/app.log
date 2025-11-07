@@ -1027,3 +1027,93 @@
 2025-10-15 21:12:36,456 - INFO - 'solve' was executed in 17.558313 seconds
 2025-10-15 21:12:36,886 - INFO - 'write_on_file' was executed in 0.429470 seconds
 2025-10-15 21:12:36,889 - INFO - 'run_synchronous_simulation' was executed in 17.995201 seconds
+2025-11-03 15:03:03,798 - INFO - Starting synchronous process
+2025-11-03 15:03:03,828 - INFO - Simulation with 2 bodies. Time span = 1826.00 days. Alpha = 0.00 degrees
+2025-11-03 15:03:19,672 - INFO - 'solve' was executed in 15.842744 seconds
+2025-11-03 15:03:19,902 - INFO - 'write_on_file' was executed in 0.230205 seconds
+2025-11-03 15:03:19,903 - INFO - 'run_synchronous_simulation' was executed in 16.104322 seconds
+2025-11-03 15:21:03,357 - INFO - Starting synchronous process
+2025-11-03 15:21:03,360 - INFO - Simulation with 2 bodies. Time span = 1826.00 days. Alpha = 0.00 degrees
+2025-11-03 15:21:18,286 - INFO - 'solve' was executed in 14.925251 seconds
+2025-11-03 15:21:18,888 - INFO - 'write_on_file' was executed in 0.601183 seconds
+2025-11-03 15:21:18,889 - INFO - 'run_synchronous_simulation' was executed in 15.532100 seconds
+2025-11-03 15:28:25,309 - INFO - Starting synchronous process
+2025-11-03 15:28:25,315 - INFO - Simulation with 2 bodies. Time span = 1826.00 days. Alpha = 0.00 degrees
+2025-11-03 15:28:47,496 - INFO - 'solve' was executed in 22.179303 seconds
+2025-11-03 15:28:47,836 - INFO - 'write_on_file' was executed in 0.339708 seconds
+2025-11-03 15:28:47,838 - INFO - 'run_synchronous_simulation' was executed in 22.528604 seconds
+2025-11-03 15:35:40,253 - INFO - Starting synchronous process
+2025-11-03 15:35:40,258 - INFO - Simulation with 2 bodies. Time span = 1826.00 days. Alpha = 0.00 degrees
+2025-11-03 15:35:58,733 - INFO - 'solve' was executed in 18.473222 seconds
+2025-11-03 15:35:58,884 - INFO - 'write_on_file' was executed in 0.150255 seconds
+2025-11-03 15:35:58,886 - INFO - 'run_synchronous_simulation' was executed in 18.632549 seconds
+2025-11-03 15:59:54,280 - INFO - Starting synchronous process
+2025-11-03 15:59:54,285 - INFO - Simulation with 2 bodies. Time span = 1826.00 days. Alpha = 0.00 degrees
+2025-11-03 16:00:29,376 - INFO - 'solve' was executed in 35.090268 seconds
+2025-11-03 16:00:29,597 - INFO - 'write_on_file' was executed in 0.220092 seconds
+2025-11-03 16:00:29,598 - INFO - 'run_synchronous_simulation' was executed in 35.317796 seconds
+2025-11-03 16:04:53,357 - INFO - Starting synchronous process
+2025-11-03 16:04:53,361 - INFO - Simulation with 2 bodies. Time span = 1826.00 days. Alpha = 0.00 degrees
+2025-11-03 16:05:06,864 - INFO - 'solve' was executed in 13.502523 seconds
+2025-11-03 16:05:06,990 - INFO - 'write_on_file' was executed in 0.125699 seconds
+2025-11-03 16:05:06,991 - INFO - 'run_synchronous_simulation' was executed in 13.634230 seconds
+2025-11-03 16:06:51,811 - INFO - Starting synchronous process
+2025-11-03 16:06:51,814 - INFO - Simulation with 2 bodies. Time span = 1826.00 days. Alpha = 0.00 degrees
+2025-11-03 16:07:09,366 - INFO - 'solve' was executed in 17.550523 seconds
+2025-11-03 16:07:09,744 - INFO - 'write_on_file' was executed in 0.377357 seconds
+2025-11-03 16:07:09,744 - INFO - 'run_synchronous_simulation' was executed in 17.933665 seconds
+2025-11-03 16:42:25,840 - INFO - Starting synchronous process
+2025-11-03 16:42:25,844 - INFO - Simulation with 2 bodies. Time span = 1826.00 days. Alpha = 0.00 degrees
+2025-11-03 16:42:47,866 - INFO - 'solve' was executed in 22.020771 seconds
+2025-11-03 16:42:48,016 - INFO - 'write_on_file' was executed in 0.150297 seconds
+2025-11-03 16:42:48,017 - INFO - 'run_synchronous_simulation' was executed in 22.177282 seconds
+2025-11-03 16:45:47,629 - INFO - Starting synchronous process
+2025-11-03 16:45:47,633 - INFO - Simulation with 2 bodies. Time span = 1826.00 days. Alpha = 0.00 degrees
+2025-11-03 16:46:02,508 - INFO - 'solve' was executed in 14.874756 seconds
+2025-11-03 16:46:02,677 - INFO - 'write_on_file' was executed in 0.168746 seconds
+2025-11-03 16:46:02,679 - INFO - 'run_synchronous_simulation' was executed in 15.050668 seconds
+2025-11-03 17:10:13,965 - INFO - Starting synchronous process
+2025-11-03 17:10:13,969 - INFO - Simulation with 2 bodies. Time span = 1826.00 days. Alpha = 0.00 degrees
+2025-11-03 17:10:29,097 - INFO - 'solve' was executed in 15.127629 seconds
+2025-11-03 17:10:29,291 - INFO - 'write_on_file' was executed in 0.193690 seconds
+2025-11-03 17:10:29,292 - INFO - 'run_synchronous_simulation' was executed in 15.327182 seconds
+2025-11-03 17:11:30,284 - INFO - Starting synchronous process
+2025-11-03 17:11:30,288 - INFO - Simulation with 2 bodies. Time span = 1826.00 days. Alpha = 0.00 degrees
+2025-11-03 17:11:44,708 - INFO - 'solve' was executed in 14.419765 seconds
+2025-11-03 17:11:44,826 - INFO - 'write_on_file' was executed in 0.117564 seconds
+2025-11-03 17:11:44,834 - INFO - 'run_synchronous_simulation' was executed in 14.550121 seconds
+2025-11-03 17:12:50,373 - INFO - Starting synchronous process
+2025-11-03 17:12:50,377 - INFO - Simulation with 2 bodies. Time span = 1826.00 days. Alpha = 0.00 degrees
+2025-11-03 17:13:04,296 - INFO - 'solve' was executed in 13.918554 seconds
+2025-11-03 17:13:04,471 - INFO - 'write_on_file' was executed in 0.173924 seconds
+2025-11-03 17:13:04,472 - INFO - 'run_synchronous_simulation' was executed in 14.098663 seconds
+2025-11-03 17:14:13,039 - INFO - Starting synchronous process
+2025-11-03 17:14:13,050 - INFO - Simulation with 2 bodies. Time span = 1826.00 days. Alpha = 0.00 degrees
+2025-11-03 17:14:30,221 - INFO - 'solve' was executed in 17.167986 seconds
+2025-11-03 17:14:30,339 - INFO - 'write_on_file' was executed in 0.117329 seconds
+2025-11-03 17:14:30,340 - INFO - 'run_synchronous_simulation' was executed in 17.300831 seconds
+2025-11-03 17:31:12,484 - INFO - Starting synchronous process
+2025-11-03 17:31:12,488 - INFO - Simulation with 2 bodies. Time span = 1826.00 days. Alpha = 0.00 degrees
+2025-11-03 17:31:33,385 - INFO - 'solve' was executed in 20.895881 seconds
+2025-11-03 17:31:33,524 - INFO - 'write_on_file' was executed in 0.139050 seconds
+2025-11-03 17:31:33,525 - INFO - 'run_synchronous_simulation' was executed in 21.040468 seconds
+2025-11-03 17:34:41,450 - INFO - Starting synchronous process
+2025-11-03 17:34:41,454 - INFO - Simulation with 2 bodies. Time span = 1826.00 days. Alpha = 0.00 degrees
+2025-11-03 17:34:56,071 - INFO - 'solve' was executed in 14.616100 seconds
+2025-11-03 17:34:56,286 - INFO - 'write_on_file' was executed in 0.213711 seconds
+2025-11-03 17:34:56,287 - INFO - 'run_synchronous_simulation' was executed in 14.837352 seconds
+2025-11-03 17:37:24,649 - INFO - Starting synchronous process
+2025-11-03 17:37:24,652 - INFO - Simulation with 2 bodies. Time span = 1826.00 days. Alpha = 0.00 degrees
+2025-11-03 17:37:41,764 - INFO - 'solve' was executed in 17.111117 seconds
+2025-11-03 17:37:42,005 - INFO - 'write_on_file' was executed in 0.240462 seconds
+2025-11-03 17:37:42,007 - INFO - 'run_synchronous_simulation' was executed in 17.357962 seconds
+2025-11-03 17:39:03,260 - INFO - Starting synchronous process
+2025-11-03 17:39:03,266 - INFO - Simulation with 2 bodies. Time span = 3652.00 days. Alpha = 0.00 degrees
+2025-11-03 17:39:43,385 - INFO - 'solve' was executed in 40.118110 seconds
+2025-11-03 17:39:43,763 - INFO - 'write_on_file' was executed in 0.377595 seconds
+2025-11-03 17:39:43,764 - INFO - 'run_synchronous_simulation' was executed in 40.503751 seconds
+2025-11-03 17:41:33,085 - INFO - Starting synchronous process
+2025-11-03 17:41:33,089 - INFO - Simulation with 2 bodies. Time span = 3652.00 days. Alpha = 0.00 degrees
+2025-11-03 17:42:06,695 - INFO - 'solve' was executed in 33.605544 seconds
+2025-11-03 17:42:06,959 - INFO - 'write_on_file' was executed in 0.263817 seconds
+2025-11-03 17:42:06,960 - INFO - 'run_synchronous_simulation' was executed in 33.874890 seconds
