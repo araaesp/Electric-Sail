@@ -18,7 +18,7 @@ class ElectricSailDynamic:
         epsilon_0 = 8.854187817e-12 # Permissividade do vacuo
         e = 1.60217662e-19   
 
-        v_sw = 400 * 1e3 # Velocidade do vento solar em m/s
+        v_sw = 300 * 1e3 # Velocidade do vento solar em m/s
         n = 7.3 * 1e6    # Densidade do vento solar a 1 UA (partículas/m^3)
         T_e_joules = 12 * e # Temperatura dos eletrons em Joule
 
