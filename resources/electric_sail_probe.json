@@ -23,7 +23,7 @@
       "V": 4000,
       "r_w": 1e-8,
       "phi_deg": -45,
-      "theta_deg": -45
+      "theta_deg": 0
     }
   ]
 }

@@ -12,15 +12,35 @@ M_ELETRON = 9.109e-31 # Massa do elétron (kg)
 class ElectricSailDynamic:
 
     @staticmethod
-    def calculate_thrust_per_m(body):
+    def calculate_thrust_per_m(body, r_m: float = None):
+        """
+        Calcula a força de empuxo por metro de fio (σ_F) em N/m.
 
+        Se r_m (distância ao Sol em metros) for dada, n e T_e são
+        calculados em funçao de r:
+            n   = n_earth * (r_earth / r)^2          (eq 68)
+            T_e = T_e_earth * (r_earth / r)^(1/3)    (eq 69)
+        Se não tiver r_m, usa os valores constantes a 1 UA que já existem.
+        """
         m_p = 1.6726219e-27  # Massa do proton em kg
         epsilon_0 = 8.854187817e-12 # Permissividade do vacuo
-        e = 1.60217662e-19   
+        e = 1.60217662e-19
 
-        v_sw = 300 * 1e3 # Velocidade do vento solar em m/s
-        n = 7.3 * 1e6    # Densidade do vento solar a 1 UA (partículas/m^3)
-        T_e_joules = 12 * e # Temperatura dos eletrons em Joule
+        r_earth = 1.496e11   # 1 UA em m
+
+        v_sw = 400 * 1e3     # Velocidade do vento solar em m/s (aprox. constante)
+        n_earth = 7.3e6      # Densidade de eletrons a 1 UA (particulas/m^3)
+        T_e_earth_eV = 12    # Temperatura dos eletrons a 1 UA (eV)
+
+        if r_m is not None and r_m > 0:
+            # eq. 68
+            n = n_earth * (r_earth / r_m) ** 2
+            # eq. 69
+            T_e_joules = (T_e_earth_eV * (r_earth / r_m) ** (1.0 / 3.0)) * e
+        else:
+            # valores a 1 UA
+            n = n_earth
+            T_e_joules = T_e_earth_eV * e
 
         # Parametros da vela
         V = body.V
@@ -60,8 +80,8 @@ class ElectricSailDynamic:
         # Distancia ao Sol
         r = np.linalg.norm(r_inercial)
 
-        # Empuxo/m a 1 UA
-        sigma_F_base = ElectricSailDynamic.calculate_thrust_per_m(body)
+        # Empuxo/m calculado na distância atual (n e T_e variam com r)
+        sigma_F_base = ElectricSailDynamic.calculate_thrust_per_m(body, r_m=r)
 
         magnitude_forca = (1/2) * N * L * sigma_F_base * (r_base_UA / r)**(7/6)
         cos_phi = np.cos(phi)
