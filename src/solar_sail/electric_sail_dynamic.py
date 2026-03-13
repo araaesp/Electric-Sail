@@ -20,7 +20,7 @@ class ElectricSailDynamic:
         calculados em funçao de r:
             n   = n_earth * (r_earth / r)^2          (eq 68)
             T_e = T_e_earth * (r_earth / r)^(1/3)    (eq 69)
-        Se não tiver r_m, usa os valores constantes a 1 UA que já existem.
+        Se não tiver r_m, usa os valores constantes a 1 U que ja tem.
         """
         m_p = 1.6726219e-27  # Massa do proton em kg
         epsilon_0 = 8.854187817e-12 # Permissividade do vacuo
@@ -28,7 +28,7 @@ class ElectricSailDynamic:
 
         r_earth = 1.496e11   # 1 UA em m
 
-        v_sw = 400 * 1e3     # Velocidade do vento solar em m/s (aprox. constante)
+        v_sw = 250 * 1e3     # Velocidade do vento solar em m/s (aprox. constante)
         n_earth = 7.3e6      # Densidade de eletrons a 1 UA (particulas/m^3)
         T_e_earth_eV = 12    # Temperatura dos eletrons a 1 UA (eV)
 
