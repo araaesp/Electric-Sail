@@ -3,5 +3,6 @@
     "python.envFile": "${workspaceFolder}\\.env",
     "terminal.integrated.env.linux": {
         "PYTHONPATH": "${workspaceFolder}"
-    }
+    },
+    "python-envs.defaultEnvManager": "ms-python.python:venv"
 }

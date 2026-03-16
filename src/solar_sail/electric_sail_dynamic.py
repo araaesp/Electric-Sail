@@ -28,7 +28,7 @@ class ElectricSailDynamic:
 
         r_earth = 1.496e11   # 1 UA em m
 
-        v_sw = 250 * 1e3     # Velocidade do vento solar em m/s (aprox. constante)
+        v_sw = 400 * 1e3     # Velocidade do vento solar em m/s (aprox. constante)
         n_earth = 7.3e6      # Densidade de eletrons a 1 UA (particulas/m^3)
         T_e_earth_eV = 12    # Temperatura dos eletrons a 1 UA (eV)
 
