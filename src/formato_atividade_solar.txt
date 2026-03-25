@@ -1,0 +1,10 @@
+  FORMAT OF THE SUBSETTED FILE
+    
+    ITEMS                      FORMAT   
+     
+ 1 YEAR                          I4        
+ 2 DOY                           I4        
+ 3 Hour                          I3        
+ 4 SW Plasma Temperature, K      F9.0      
+ 5 SW Proton Density, N/cm^3     F6.1      
+ 6 SW Plasma Speed, km/s         F6.0      
