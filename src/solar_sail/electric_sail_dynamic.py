@@ -3,13 +3,30 @@ from model.electric_probe import ElectricSailProbe
 
 K_T = 4.3          # Coeficiente do Hoytether (ex: para 4 sub-fios)
 BETA = 0.25        # Razão massa-potência da espaçonave (kg/W)
-N_EARTH = 7.3e6    # Densidade de elétrons do vento solar a 1 UA (partículas/m^3)
 RHO_W = 4000       # Massa específica do material do fio (kg/m^3)
 E_CARGA = 1.602e-19  # Carga elementar (C)
 M_ELETRON = 9.109e-31 # Massa do elétron (kg)
 
 
 class ElectricSailDynamic:
+
+    @staticmethod
+    def get_solar_wind_properties_1au(v_sw_km_s: float):
+        """
+        Retorna propriedades empíricas do vento solar a 1 UA para uma dada
+        velocidade do vento solar (km/s). Ver arquivo atividade_solar.csv e ultima celula do notebook data_analysis.ipynb.
+
+        Retorno:
+            n_m3: densidade em partículas/m^3
+            t_ev: temperatura eletrônica em eV
+        """
+        t_ev = (5.226637e-02 * v_sw_km_s) - 1.424377e+01
+        t_ev = max(t_ev, 1.0)
+
+        n_cm3 = 5.782467e+01 * np.exp(-6.727436e-03 * v_sw_km_s) + 2.561164e+00
+        n_m3 = n_cm3 * 1e6
+
+        return n_m3, t_ev
 
     @staticmethod
     def calculate_thrust_per_m(body, r_m: float = None):
@@ -28,9 +45,9 @@ class ElectricSailDynamic:
 
         r_earth = 1.496e11   # 1 UA em m
 
-        v_sw = 400 * 1e3     # Velocidade do vento solar em m/s (aprox. constante)
-        n_earth = 7.3e6      # Densidade de eletrons a 1 UA (particulas/m^3)
-        T_e_earth_eV = 10    # Temperatura dos eletrons a 1 UA (eV)
+        v_sw_km_s = 400
+        v_sw = v_sw_km_s * 1e3
+        n_earth, T_e_earth_eV = ElectricSailDynamic.get_solar_wind_properties_1au(v_sw_km_s)
 
         if r_m is not None and r_m > 0:
             # eq. 68
@@ -111,9 +128,11 @@ class ElectricSailDynamic:
 
         # rotacao
         F_vela_inercial = matriz_rotacao @ F_vela_orbita
+
+        n_earth_calculado, _ = ElectricSailDynamic.get_solar_wind_properties_1au(400)
         
         # Massa do corpo da vela por metro do fio (eq 75)
-        sigma_mb = 2 * K_T * BETA * N_EARTH * r_w * np.sqrt((2 * E_CARGA**3 * V**3) / M_ELETRON)
+        sigma_mb = 2 * K_T * BETA * n_earth_calculado * r_w * np.sqrt((2 * E_CARGA**3 * V**3) / M_ELETRON)
         
         # Massa dos fios por metro de fio (eq 76)
         sigma_mt = K_T * np.pi * RHO_W * r_w**2
