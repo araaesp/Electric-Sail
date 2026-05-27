@@ -1,6 +1,7 @@
 from n_body.n_body_solver import NBodySolver, CollisionException
 from utils.converter import kepler_to_cartesian, probe_kepler_to_cartesian
 from model.electric_probe import ElectricSailProbe
+from solar_sail.electric_sail_dynamic import ElectricSailDynamic
 import pandas as pd
 import json
 
@@ -23,6 +24,7 @@ def solve(data):
 
 def process_data(data):
     corpos_finais = data.get('bodies', [])
+    has_electric_sail = False
 
     if 'keplerian_bodies' in data:
         corpos_finais.extend(data['keplerian_bodies'])
@@ -35,6 +37,7 @@ def process_data(data):
 
     if 'electric_sail_probes' in data:
         corpos_finais.extend(data['electric_sail_probes'])
+        has_electric_sail = True
 
     start_time_str = data.get('start_time')
     end_time_str = data.get('end_time')
@@ -43,6 +46,9 @@ def process_data(data):
     start_time = datetime.strptime(start_time_str, "%Y-%m-%d %H:%M:%S")
     end_time = datetime.strptime(end_time_str, "%Y-%m-%d %H:%M:%S")
     time_span = (end_time - start_time).total_seconds()
+
+    if has_electric_sail:
+        ElectricSailDynamic.configure_from_csv(start_time)
     
     return corpos_finais, time_span
 
