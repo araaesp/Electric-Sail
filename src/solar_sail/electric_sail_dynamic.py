@@ -16,6 +16,41 @@ class ElectricSailDynamic:
     _n_earth_m3 = 7.3e6
     _t_e_earth_ev = 10.0
     _config_source = "default"
+    _ecliptic_normal_i = np.array([0.0, 0.0, 1.0])
+
+    @staticmethod
+    def _tcc_orbital_basis(r_inercial):
+        """Retorna a base O_o do TCC escrita em coordenadas inerciais.
+
+        O TCC define z_o na direcao radial Sol-sonda. O eixo y_o e
+        perpendicular simultaneamente a z_o e a normal da ecliptica; x_o
+        completa a base destrorsa. Essa base nao usa a velocidade da sonda.
+        """
+        r_norm = np.linalg.norm(r_inercial)
+        if not np.isfinite(r_norm) or r_norm <= 0.0:
+            raise ValueError("A posicao da sonda deve ter norma positiva.")
+
+        z_o = np.asarray(r_inercial, dtype=float) / r_norm
+        y_raw = np.cross(ElectricSailDynamic._ecliptic_normal_i, z_o)
+        y_norm = np.linalg.norm(y_raw)
+
+        # Quando z_o e paralelo a z_i, a definicao geometrica do TCC nao
+        # determina y_o: nao existe interseccao unica entre os planos.
+        if not np.isfinite(y_norm) or y_norm <= 1e-12:
+            raise ValueError(
+                "A base orbital do TCC e indefinida quando r e paralelo "
+                "a normal da ecliptica."
+            )
+
+        y_o = y_raw / y_norm
+        x_o = np.cross(y_o, z_o)
+        x_norm = np.linalg.norm(x_o)
+        if not np.isfinite(x_norm) or x_norm <= 1e-12:
+            raise ValueError("Nao foi possivel construir a base orbital do TCC.")
+        x_o = x_o / x_norm
+
+        # As colunas sao os eixos de O_o escritos em O_i.
+        return np.column_stack((x_o, y_o, z_o))
 
     @classmethod
     def configure_from_csv(cls, start_time, csv_path=None):
@@ -117,13 +152,13 @@ class ElectricSailDynamic:
 
         # Posicao no referencial inercial
         r_inercial = body.position * 1000
-        v_inercial = body.velocity * 1000
         
         # Distancia ao Sol
         r = np.linalg.norm(r_inercial)
 
-        # Empuxo/m calculado na distância atual (n e T_e variam com r)
-        sigma_F_base = ElectricSailDynamic.calculate_thrust_per_m(body, r_m=r)
+        sigma_F_base = ElectricSailDynamic.calculate_thrust_per_m(
+            body, r_m=None
+        )
 
         magnitude_forca = (1/2) * N * L * sigma_F_base * (r_base_UA / r)**(7/6)
         cos_phi = np.cos(phi)
@@ -138,18 +173,8 @@ class ElectricSailDynamic:
         F_vela_orbita = magnitude_forca * np.array([Fx_orbita, Fy_orbita, Fz_orbita])
         #F_vela_orbita = 1e-6 * np.array([1, 0, 0])
 
-        # eixo z da orbita escrito no sistema inercial
-        z_o = r_inercial / r
-
-        # eixo x da orbita escrito no sistema inercial
-        h_vec = np.cross(r_inercial, v_inercial)
-        x_o = - h_vec / np.linalg.norm(h_vec)
-
-        # eixo y da orbita escrito no sistema inercial
-        y_o = np.cross(z_o, x_o)
-
-        # Matriz de rotacao orbita -> inercial
-        matriz_rotacao = np.array([x_o, y_o, z_o]).T
+        # Matriz de rotacao O_o -> O_i conforme a definicao geometrica do TCC.
+        matriz_rotacao = ElectricSailDynamic._tcc_orbital_basis(r_inercial)
 
         # rotacao
         F_vela_inercial = matriz_rotacao @ F_vela_orbita
