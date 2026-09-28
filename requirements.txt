@@ -48,6 +48,7 @@ pytz
 pyzmq
 qtconsole
 scipy
+seaborn
 Send2Trash
 sgp4
 six
