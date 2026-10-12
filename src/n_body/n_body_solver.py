@@ -45,9 +45,10 @@ class NBodySolver:
             size of the list of bodies
         """
 
-        self.__g = 6.6742e-20
+        self.__g = 6.6742e-20  # km^3/(kg s^2), coerente com posição em km e tempo em s
         self.__bodies = bodies
         self.__n_bodies = len(self.__bodies)
+        # O log é reiniciado a cada solver e registra apenas aceleração gravitacional.
         with open('gravity_log.csv', 'w') as f:
             f.write('time,a_x,a_y,a_z\n')
 
@@ -139,7 +140,7 @@ class NBodySolver:
                 body_n_components = np.append(body_n_components, [a_rad_pressure], axis=0)
 
             if isinstance(self.bodies[i], ElectricSailProbe):
-            #if i == 1:
+                # A aceleração do modelo e-sail já retorna em km/s^2.
                 a_electric_sail = ElectricSailDynamic.calculate_acceleration(self.bodies[i])
                 body_n_components = np.append(body_n_components, [a_electric_sail], axis=0)
 
@@ -211,23 +212,18 @@ class NBodySolver:
             # updating t with the t at the end of the step
             t = integrator.t
 
-            # --- INÍCIO DA NOVA MODIFICAÇÃO ---
-            # Após guardar o estado, vamos calcular a gravidade total na nossa sonda (corpo 1)
-            # REUTILIZANDO a função de cálculo de gravidade já existente.
-            
+            # gravity_log registra, à parte, a aceleração gravitacional da sonda.
+            # Convenção atual: a sonda é o segundo corpo (índice 1).
             sonda = self.__bodies[1]
             a_grav_total_na_sonda = np.array([0.0, 0.0, 0.0])
 
-            # Itera sobre todos os corpos para somar a sua gravidade na sonda
             for outro_corpo in self.__bodies:
                 if outro_corpo is not sonda: # Um corpo não exerce gravidade sobre si mesmo
-                    # Chama a função interna do solver para calcular a gravidade que 'outro_corpo' exerce na 'sonda'
                     a_grav_total_na_sonda += self.__calc_g_acceleration(sonda, outro_corpo)
 
-            # Guarda o tempo e o vetor de aceleração no ficheiro
+            # A aceleração gravada está em km/s^2 e não inclui o empuxo da vela.
             with open('gravity_log.csv', 'a') as f:
                 f.write(f'{t},{a_grav_total_na_sonda[0]},{a_grav_total_na_sonda[1]},{a_grav_total_na_sonda[2]}\n')
-            # --- FIM DA NOVA MODIFICAÇÃO ---
 
         return y_t
 

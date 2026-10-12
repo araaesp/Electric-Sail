@@ -25,7 +25,8 @@ Este módulo oferece:
    mudar inclinação, etc.).
 
 Ainda não está conectado ao solver; serve como bloco isolado para análise
-e integração futura.
+e integração futura. A base LOF deste auxiliar usa posição e velocidade;
+ela não é a base O_o do TCC montada em ElectricSailDynamic.
 """
 from __future__ import annotations
 

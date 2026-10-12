@@ -56,6 +56,7 @@ def run_parallel_simulation():
 
 
 def run_simulation(alpha):
+    # No caso e-sail atual, alpha só identifica a saída; a atitude vem do JSON.
     data = RequestDto().load(input_json)
     #keplerian_solar_probes = data.get('keplerian_solar_probes')
     #if 90 < alpha < 270:

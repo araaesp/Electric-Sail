@@ -3,15 +3,24 @@ from datetime import datetime
 from pathlib import Path
 from model.electric_probe import ElectricSailProbe
 
-K_T = 4.3          # Coeficiente do Hoytether (ex: para 4 sub-fios)
+# Constantes usadas nas equações do modelo; valores em SI, salvo indicação.
+K_T = 4.3          # Coeficiente do Hoytether
 BETA = 0.25        # Razão massa-potência da espaçonave (kg/W)
-N_EARTH = 7.3e6    # Densidade de elétrons do vento solar a 1 UA (partículas/m^3)
+N_EARTH = 7.3e6    # Densidade fixa da massa (eq. 75), distinta da amostra usada no empuxo.
 RHO_W = 4000       # Massa específica do material do fio (kg/m^3)
-E_CARGA = 1.602e-19  # Carga elementar (C)
+E_CARGA = 1.602e-19  # Valor arredondado usado no cálculo da massa (C)
 M_ELETRON = 9.109e-31 # Massa do elétron (kg)
+M_PROTON = 1.6726219e-27  # Massa do próton (kg)
+EPSILON_0 = 8.854187817e-12  # Permissividade do vácuo (F/m)
+E_CARGA_F = 1.60217662e-19  # Valor mais preciso usado no cálculo da força (C)
+AU_M = 1.496e11     # UA (m)
 
 
 class ElectricSailDynamic:
+    """Modelo de empuxo da e-sail e sua transformação para o referencial inercial."""
+
+    # Valores do vento a 1 UA, compartilhados pelo cálculo do empuxo.
+    # São valores padrão até o serviço os atualizar com a amostra da missão.
     _v_sw_km_s = 400.0
     _n_earth_m3 = 7.3e6
     _t_e_earth_ev = 10.0
@@ -24,7 +33,7 @@ class ElectricSailDynamic:
 
         O TCC define z_o na direcao radial Sol-sonda. O eixo y_o e
         perpendicular simultaneamente a z_o e a normal da ecliptica; x_o
-        completa a base destrorsa. Essa base nao usa a velocidade da sonda.
+        completa a base dextrogira.
         """
         r_norm = np.linalg.norm(r_inercial)
         if not np.isfinite(r_norm) or r_norm <= 0.0:
@@ -54,6 +63,11 @@ class ElectricSailDynamic:
 
     @classmethod
     def configure_from_csv(cls, start_time, csv_path=None):
+        """Carrega a amostra mais próxima no mesmo dia e atualiza o vento a 1 UA.
+
+        A tabela fornece temperatura em K, densidade em cm^-3 e velocidade em
+        km/s; aqui são convertidas para eV, m^-3 e km/s, respectivamente.
+        """
         if csv_path is None:
             csv_path = Path(__file__).resolve().parent.parent / "atividade_solar.csv"
 
@@ -80,55 +94,40 @@ class ElectricSailDynamic:
         row = candidates[idx]
 
         temp_k = float(row[3])
-        dens_cm3 = float(row[4])
+        dens_cm3 = float(row[4])  # densidade de prótons da tabela, usada como n no modelo
         vel_km_s = float(row[5])
 
-        cls._v_sw_km_s = vel_km_s
-        cls._n_earth_m3 = dens_cm3 * 1e6
-        cls._t_e_earth_ev = temp_k / 11604.5
+        cls._v_sw_km_s = vel_km_s  # km/s
+        cls._n_earth_m3 = dens_cm3 * 1e6  # cm^-3 -> m^-3
+        cls._t_e_earth_ev = temp_k / 11604.5  # K -> eV
         cls._config_source = f"{year}-DOY{doy}-H{int(round(row[2]))}"
 
     @staticmethod
-    def calculate_thrust_per_m(body, r_m: float = None):
+    def calculate_thrust_per_m(body):
         """
         Calcula a força de empuxo por metro de fio (σ_F) em N/m.
 
-        Se r_m (distância ao Sol em metros) for dada, n e T_e são
-        calculados em funçao de r:
-            n   = n_earth * (r_earth / r)^2          (eq 68)
-            T_e = T_e_earth * (r_earth / r)^(1/3)    (eq 69)
-        Se não tiver r_m, usa os valores constantes a 1 U que ja tem.
+        Usa os valores de referência a 1 UA. A dependência radial aproximada
+        do empuxo é aplicada em calculate_acceleration, conforme a eq. 73.
         """
-        m_p = 1.6726219e-27  # Massa do proton em kg
-        epsilon_0 = 8.854187817e-12 # Permissividade do vacuo
-        e = 1.60217662e-19
-
-        r_earth = 1.496e11   # 1 UA em m
-
+        # O modelo interno usa SI: km/s -> m/s e eV -> J onde necessário.
         v_sw = ElectricSailDynamic._v_sw_km_s * 1e3
         n_earth = ElectricSailDynamic._n_earth_m3
         T_e_earth_eV = ElectricSailDynamic._t_e_earth_ev
 
-        if r_m is not None and r_m > 0:
-            # eq. 68
-            n = n_earth * (r_earth / r_m) ** 2
-            # eq. 69
-            T_e_joules = (T_e_earth_eV * (r_earth / r_m) ** (1.0 / 3.0)) * e
-        else:
-            # valores a 1 UA
-            n = n_earth
-            T_e_joules = T_e_earth_eV * e
+        n = n_earth
+        T_e_joules = T_e_earth_eV * E_CARGA_F
 
         # Parametros da vela
-        V = body.V
-        r_w = body.r_w * 1000
+        V = body.V  # tensão elétrica (V)
+        r_w = body.r_w * 1000  # km -> m
 
-        termo_raiz_ln = np.sqrt((epsilon_0 * T_e_joules) / (n * e**2))
+        termo_raiz_ln = np.sqrt((EPSILON_0 * T_e_joules) / (n * E_CARGA_F**2))
         arg_ln = (2 / r_w) * termo_raiz_ln
         resultado_ln = np.log(arg_ln)
-        expoente = (m_p * v_sw**2 / (e * V)) * resultado_ln
-        denominador = e * np.sqrt(np.exp(expoente) - 1)
-        numerador = 6.18 * m_p * v_sw**2 * np.sqrt(n * epsilon_0 * T_e_joules)
+        expoente = (M_PROTON * v_sw**2 / (E_CARGA_F * V)) * resultado_ln
+        denominador = E_CARGA_F * np.sqrt(np.exp(expoente) - 1)
+        numerador = 6.18 * M_PROTON * v_sw**2 * np.sqrt(n * EPSILON_0 * T_e_joules)
 
         sigma_F = numerador / denominador
 
@@ -137,30 +136,29 @@ class ElectricSailDynamic:
     @staticmethod
     def calculate_acceleration(body: ElectricSailProbe):
         """
-        Calcula o vetor de aceleração gerado pela Vela Elétrica.
-        """
-        r_base_UA = 1.496e11
+        Calcula a aceleração da e-sail em coordenadas inerciais, em km/s^2.
 
+        A massa propulsiva é calculada pelas equações 75–76; não é body.mass.
+        """
         # Parâmetros da vela
-        
         N = body.N
-        L = body.L * 1000
+        L = body.L * 1000  # comprimento por fio: km -> m
         phi = body.phi
         theta = body.theta
-        r_w = body.r_w * 1000
-        V = body.V
+        r_w = body.r_w * 1000  # raio do fio: km -> m
+        V = body.V  # tensão elétrica em volts (não é velocidade)
 
-        # Posicao no referencial inercial
-        r_inercial = body.position * 1000
+        # A integração usa km; as equações de empuxo usam metros.
+        r_inercial = body.position * 1000  # km -> m
         
         # Distancia ao Sol
         r = np.linalg.norm(r_inercial)
 
-        sigma_F_base = ElectricSailDynamic.calculate_thrust_per_m(
-            body, r_m=None
-        )
+        # Empuxo por metro calculado com valores de referência; a lei radial
+        # (r_AU/r)^(7/6) é aplicada uma única vez abaixo.
+        sigma_F_base = ElectricSailDynamic.calculate_thrust_per_m(body)
 
-        magnitude_forca = (1/2) * N * L * sigma_F_base * (r_base_UA / r)**(7/6)
+        magnitude_forca = (1/2) * N * L * sigma_F_base * (AU_M / r)**(7/6)
         cos_phi = np.cos(phi)
         sin_phi = np.sin(phi)
         cos_theta = np.cos(theta)
@@ -171,14 +169,13 @@ class ElectricSailDynamic:
         Fz_orbita = cos_phi**2 * cos_theta**2 + 1
         
         F_vela_orbita = magnitude_forca * np.array([Fx_orbita, Fy_orbita, Fz_orbita])
-        #F_vela_orbita = 1e-6 * np.array([1, 0, 0])
-
-        # Matriz de rotacao O_o -> O_i conforme a definicao geometrica do TCC.
+        # Matriz de rotacao O_o -> O_i conforme a definicao geometrica do TCC
         matriz_rotacao = ElectricSailDynamic._tcc_orbital_basis(r_inercial)
 
         # rotacao
         F_vela_inercial = matriz_rotacao @ F_vela_orbita
 
+        # A massa usada vem das eqs. 75-78, não do campo body.mass.
         # Massa do corpo da vela por metro do fio (eq 75)
         sigma_mb = 2 * K_T * BETA * N_EARTH * r_w * np.sqrt((2 * E_CARGA**3 * V**3) / M_ELETRON)
         

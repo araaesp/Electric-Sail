@@ -35,6 +35,8 @@ class SolarProbeSchema(BodySchema):
     def instantiate_body(self, data, **kwargs):
         return SolarProbe(**data)
 
+# Unidades da entrada JSON: Body usa mass em kg, position/radius em km e
+# velocity em km/s. Na e-sail, L/r_w usam km, V usa volts e os ângulos usam graus.
 class ElectricSailProbeSchema(BodySchema):
     N = fields.Int()
     L = fields.Float()

@@ -48,6 +48,7 @@ def process_data(data):
     time_span = (end_time - start_time).total_seconds()
 
     if has_electric_sail:
+        # Usa a linha da data inicial; o solver padrão mantém esses valores.
         ElectricSailDynamic.configure_from_csv(start_time)
     
     return corpos_finais, time_span
