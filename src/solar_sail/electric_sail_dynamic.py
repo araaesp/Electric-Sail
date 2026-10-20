@@ -119,8 +119,8 @@ class ElectricSailDynamic:
         T_e_joules = T_e_earth_eV * E_CARGA_F
 
         # Parametros da vela
-        V = body.V  # tensão elétrica (V)
-        r_w = body.r_w * 1000  # km -> m
+        V = body.V_volts  # tensão elétrica (V)
+        r_w = body.r_w_km * 1000  # km -> m
 
         termo_raiz_ln = np.sqrt((EPSILON_0 * T_e_joules) / (n * E_CARGA_F**2))
         arg_ln = (2 / r_w) * termo_raiz_ln
@@ -145,8 +145,8 @@ class ElectricSailDynamic:
         L = body.L * 1000  # comprimento por fio: km -> m
         phi = body.phi
         theta = body.theta
-        r_w = body.r_w * 1000  # raio do fio: km -> m
-        V = body.V  # tensão elétrica em volts (não é velocidade)
+        r_w = body.r_w_km * 1000  # raio do fio: km -> m
+        V = body.V_volts  # tensão elétrica em volts (não é velocidade)
 
         # A integração usa km; as equações de empuxo usam metros.
         r_inercial = body.position * 1000  # km -> m
@@ -175,7 +175,7 @@ class ElectricSailDynamic:
         # rotacao
         F_vela_inercial = matriz_rotacao @ F_vela_orbita
 
-        # A massa usada vem das eqs. 75-78, não do campo body.mass.
+        # A massa usada vem das eqs. 75-78, não de body.mass.
         # Massa do corpo da vela por metro do fio (eq 75)
         sigma_mb = 2 * K_T * BETA * N_EARTH * r_w * np.sqrt((2 * E_CARGA**3 * V**3) / M_ELETRON)
         
@@ -183,12 +183,12 @@ class ElectricSailDynamic:
         sigma_mt = K_T * np.pi * RHO_W * r_w**2
         
         # Massa seca total por metro de fio
-        sigma_m_seca = sigma_mb + sigma_mt
+        sigma_m_vela = sigma_mb + sigma_mt
         
         L_total = N * L
-        m_seca = sigma_m_seca * L_total
+        m_vela = sigma_m_vela * L_total
         
         # a = F/m
-        a_vela_inercial = (F_vela_inercial / m_seca) * 0.001  # converter de m/s^2 para km/s^2
+        a_vela_inercial = (F_vela_inercial / m_vela) * 0.001  # converte de m/s^2 para km/s^2
 
         return a_vela_inercial

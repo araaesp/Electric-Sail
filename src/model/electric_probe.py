@@ -15,5 +15,7 @@ class ElectricSailProbe(Body):
         self.L = L              # Comprimento de cada fio (km)
         self.V = V              # Tensão elétrica da vela (V)
         self.r_w = r_w          # Raio do fio (km)
+        self.V_volts = V
+        self.r_w_km = r_w
         self.phi = np.deg2rad(phi_deg)    # Entrada em graus; armazenado em radianos
         self.theta = np.deg2rad(theta_deg) # Entrada em graus; armazenado em radianos

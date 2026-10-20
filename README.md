@@ -16,8 +16,6 @@ pip install -r requirements.txt
 - `src/n_body/n_body_solver.py`: integra a gravidade e soma a aceleração da vela.
 - `src/solar_sail/electric_sail_dynamic.py`: calcula o empuxo e a aceleração da e-sail.
 
-`src/app.py` disponibiliza a simulação pela API; `src/by_hand_simulation.py` executa a configuração local.
-
 ## Unidades da configuração
 
 No JSON, `mass` é kg; `position` e `radius` são km; `velocity` é km/s. `radius` é o raio usado para colisões, não o raio dos fios.

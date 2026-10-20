@@ -35,18 +35,29 @@ class SolarProbeSchema(BodySchema):
     def instantiate_body(self, data, **kwargs):
         return SolarProbe(**data)
 
-# Unidades da entrada JSON: Body usa mass em kg, position/radius em km e
-# velocity em km/s. Na e-sail, L/r_w usam km, V usa volts e os ângulos usam graus.
+# Unidades: mass em kg, position/radius em km, velocity em km/s; na e-sail,
+# L/r_w_km em km, V_volts em volts e ângulos em graus. Nomes antigos seguem aceitos.
 class ElectricSailProbeSchema(BodySchema):
+    mass_kg = fields.Float(allow_none=True)
     N = fields.Int()
     L = fields.Float()
-    V = fields.Float()
-    r_w = fields.Float()
+    V = fields.Float(allow_none=True)
+    r_w = fields.Float(allow_none=True)
+    V_volts = fields.Float(allow_none=True)
+    r_w_km = fields.Float(allow_none=True)
     phi_deg = fields.Float()
     theta_deg = fields.Float()
 
     @post_load
     def instantiate_body(self, data, **kwargs):
+        for current, previous in (
+            ('mass_kg', 'mass'),
+            ('V_volts', 'V'),
+            ('r_w_km', 'r_w'),
+        ):
+            value = data.pop(current, None)
+            if value is not None:
+                data[previous] = value
         return ElectricSailProbe(**data)
 
 class KeplerianBodySchema(Schema):

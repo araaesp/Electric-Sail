@@ -14,14 +14,14 @@
   "electric_sail_probes": [
     {
       "name": "E-Sail Mission 1",
-      "mass": 100,
+      "mass_kg": 100,
       "radius": 0.01,
       "position": [149600000, 0, 0],
       "velocity": [0, 29.78, 0],
       "N": 100,
       "L": 20,
-      "V": 4000,
-      "r_w": 1e-8,
+      "V_volts": 4000,
+      "r_w_km": 1e-8,
       "phi_deg": 0,
       "theta_deg": 0
     }
